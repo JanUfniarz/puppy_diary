@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/main_views.dart';
-import 'package:puppy_diary/theme.dart';
+import 'package:puppy_diary/views/main_views.dart';
+import 'package:puppy_diary/style/default_theme.dart';
 
 class PuppyDiary extends StatefulWidget {
   const PuppyDiary({super.key});
@@ -15,7 +15,7 @@ class _PuppyDiaryState extends State<PuppyDiary> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
+      theme: defaultTheme,
       home: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           items: views.map((el) => el.navItem).toList(),
