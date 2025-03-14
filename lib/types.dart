@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/app_controller.dart';
 
-typedef DogData = ({int id, String name, DateTime birthday});
+typedef IndividualData = ({int id, String name, DateTime birthday});
 
 typedef RaceData = ();
 
 typedef GeneralData = ();
 
-typedef Transformer = () Function(
-    DogData dogData,
+typedef DogData = ();
+
+typedef Transformer = DogData Function(
+    IndividualData dogData,
     RaceData raceData,
     GeneralData generalData
 );
