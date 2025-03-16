@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:puppy_diary/app_controller.dart';
-import 'package:puppy_diary/types.dart';
+import 'package:puppy_diary/types/function_types.dart';
 import 'package:puppy_diary/views/home_view.dart';
 import 'package:puppy_diary/views/puppy_view.dart';
 

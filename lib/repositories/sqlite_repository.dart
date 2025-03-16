@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -9,24 +10,15 @@ class SQLiteRepository {
     return _database!;
   }
 
-  Future<Database> _initDatabase() async => await openDatabase(
-      join(await getDatabasesPath(), 'puppy_diary.db'),
+  Future<Database> _initDatabase() async {
+    var dbPath = await getDatabasesPath();
+    var script = await rootBundle.loadString('assets/sql/create_tables.sql');
+    return await openDatabase(
+      join(dbPath, 'puppy_diary.db'),
       version: 1,
-      onCreate: (db, version) => db.execute(
-        // language=SQL
-        '''
-        CREATE TABLE dogs (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT,
-        );
-        CREATE TABLE breeds ();
-        '''
-      ),
+      onCreate: (db, version) => db.execute(script),
     );
-}
-
-class IndividualRepository extends SQLiteRepository {
-
+  }
 }
 
 class RaceRepository extends SQLiteRepository {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:puppy_diary/repositories/individual_repository.dart';
 import 'package:puppy_diary/repositories/sqlite_repository.dart';
-import 'package:puppy_diary/types.dart';
+import 'package:puppy_diary/types/data_types.dart';
+import 'package:puppy_diary/types/function_types.dart';
 
 class AppController extends ChangeNotifier {
   final Transformer _transformer;

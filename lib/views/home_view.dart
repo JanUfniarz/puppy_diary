@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/types.dart';
+import 'package:puppy_diary/types/function_types.dart';
 import 'package:puppy_diary/widgets/next_event_card.dart';
 
 AppViewBuilder homeView = (context, controller, child) => ListView(
