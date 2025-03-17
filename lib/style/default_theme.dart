@@ -20,6 +20,11 @@ ThemeData defaultTheme = ThemeData(
     selectedItemColor: palette[Col.secondary]
   ),
 
+  drawerTheme: DrawerThemeData(
+    backgroundColor: palette[Col.background],
+    width: 200
+  ),
+
   cardTheme: CardTheme(
     color:  palette[Col.secondary],
   ),

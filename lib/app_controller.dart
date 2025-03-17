@@ -14,5 +14,21 @@ class AppController extends ChangeNotifier {
 
   DogData? data;
 
-  AppController(this._transformer, this._repo);
+  AppController(this._transformer, this._repo) {
+    loadData();
+  }
+
+  void loadData() => _repo.individual.getAll()
+      .then((val) => data = _transformer(val[0], ()))
+      .then((_) => notifyListeners());
 }
+
+Transformer mainTransformer = (ind, _) => (
+  name: ind.name,
+  fullName: ind.fullName,
+  lastWeight: _lastWeight(ind.weightHistory),
+  weightHistory: ind.weightHistory,
+);
+
+double _lastWeight(WeightList weightHistory) => weightHistory
+    .reduce((x, y) => x.time.isAfter(y.time) ? x : y).weight;

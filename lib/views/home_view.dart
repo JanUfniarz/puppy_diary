@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/function_types.dart';
 import 'package:puppy_diary/widgets/next_event_card.dart';
 
-AppViewBuilder homeView = (context, controller, child) => ListView(
+AppViewBuilder homeView = (context, controller, data) => ListView(
   children: <Widget>[
 
     const NextEventCard(
@@ -11,7 +11,9 @@ AppViewBuilder homeView = (context, controller, child) => ListView(
       date: '08.04.2025',
     ),
 
-    const WeightDiagramCard()
+    data == null ? const SizedBox() : const WeightCard(
+      weight: 5.1,
+    )
 
   ].map((el) => Padding(
     padding: const EdgeInsets.all(8),
@@ -19,13 +21,21 @@ AppViewBuilder homeView = (context, controller, child) => ListView(
   )).toList(),
 );
 
-class WeightDiagramCard extends StatelessWidget {
-  const WeightDiagramCard({super.key});
+class WeightCard extends StatelessWidget {
+  final double weight;
+
+  const WeightCard({super.key, required this.weight});
 
   @override
-  Widget build(BuildContext context) => const Card(
-    child: Center(
-      child: Text('wykres wagi'),
+  Widget build(BuildContext context) => Card(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        const SizedBox(),
+        Text(
+          '$weight kg'
+        ),
+      ],
     )
   );
 }

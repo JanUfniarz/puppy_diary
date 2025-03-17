@@ -8,13 +8,12 @@ import 'package:puppy_diary/database/sqlite_repository.dart';
 void main() => runApp(
   ChangeNotifierProvider<AppController>(
     create: (_) => AppController(
-      (dogData, raceData) => (
-      ),
-      (
-        individual: IndividualRepository(),
-        general: GeneralRepository(),
-        race: RaceRepository()
-      )
+        mainTransformer,
+        (
+          individual: IndividualRepository(),
+          general: GeneralRepository(),
+          race: RaceRepository()
+        )
     ),
     child: const PuppyDiary()
   )

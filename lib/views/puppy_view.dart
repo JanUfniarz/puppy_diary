@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/function_types.dart';
 
-AppViewBuilder puppyView = (context, controller, child) => const Column(
+AppViewBuilder puppyView = (context, controller, data) => const Column(
   crossAxisAlignment: CrossAxisAlignment.stretch,
   children: [
     SizedBox(height: 40),
