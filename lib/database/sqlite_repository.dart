@@ -12,19 +12,47 @@ class SQLiteRepository {
 
   Future<Database> _initDatabase() async {
     var dbPath = await getDatabasesPath();
-    var script = await rootBundle.loadString('assets/sql/create_tables.sql');
+    // uncomment to rebuild
+    // await deleteDatabase(join(dbPath, 'puppy_diary.db'));
+
     return await openDatabase(
       join(dbPath, 'puppy_diary.db'),
       version: 1,
-      onCreate: (db, version) => db.execute(script),
+      onCreate: (db, version) async {
+
+        // language=sql
+        await db.execute('''
+          CREATE TABLE dogs (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              name TEXT NOT NULL,
+              full_name TEXT NOT NULL,
+              birthday TEXT NOT NULL
+          );
+        ''');
+
+        // language=sql
+        await db.execute('''
+          CREATE TABLE weight_history (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              time TEXT NOT NULL,
+              weight REAL NOT NULL,
+              individual_id INTEGER NOT NULL,
+              FOREIGN KEY (individual_id) REFERENCES individuals (id) ON DELETE CASCADE
+          );
+        ''');
+
+        // language=sql
+        await db.execute('''
+          CREATE TABLE event_history (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              time TEXT NOT NULL,
+              done BOOLEAN NOT NULL,
+              type TEXT NOT NULL,
+              individual_id INTEGER NOT NULL,
+              FOREIGN KEY (individual_id) REFERENCES individuals (id) ON DELETE CASCADE
+          );
+        ''');
+      },
     );
   }
-}
-
-class RaceRepository extends SQLiteRepository {
-
-}
-
-class GeneralRepository {
-
 }

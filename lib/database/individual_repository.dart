@@ -20,18 +20,23 @@ class IndividualRepository
     ))).toList();
   }
 
-  Future<void> insert(IndividualData dog) async => await (
+  Future<int> insertDog(IndividualData dog) async => await (
       await database
   ).transaction((txn) async {
       var data = toRaw(dog);
 
-      await txn.insert('dogs', data.dog);
+      int id = await txn.insert('dogs', data.dog);
 
-      for (var weight in data.weightHistory)
+      for (var weight in data.weightHistory) {
+        weight['individual_id'] = id;
         await txn.insert('weight_history', weight);
+      }
 
-      for (var event in data.eventHistory)
+      for (var event in data.eventHistory) {
+        event['individual_id'] = id;
         await txn.insert('event_history', event);
+      }
+      return id;
     });
 
   Future<void> update(int id, RawObject data, {String table = 'dogs'}) async => (

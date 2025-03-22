@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:puppy_diary/app_controller.dart';
-import 'package:puppy_diary/puppy_diary.dart';
+import 'package:puppy_diary/controllers/app_controller.dart';
 import 'package:puppy_diary/database/individual_repository.dart';
-import 'package:puppy_diary/database/sqlite_repository.dart';
+import 'package:puppy_diary/helpers/main_transformer.dart';
+import 'package:puppy_diary/puppy_diary.dart';
 
-void main() => runApp(
-  ChangeNotifierProvider<AppController>(
-    create: (_) => AppController(
-        mainTransformer,
-        (
-          individual: IndividualRepository(),
-          general: GeneralRepository(),
-          race: RaceRepository()
-        )
-    ),
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  AppController.initiate(
+      mainTransformer,
+      IndividualRepository()
+  );
+
+  runApp(ChangeNotifierProvider<AppController>(
+    create: (_) => AppController.instance,
     child: const PuppyDiary()
-  )
-);
+  ));
+}

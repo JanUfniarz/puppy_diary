@@ -23,6 +23,7 @@ typedef IndividualData = ({
 typedef RaceData = ();
 
 typedef DogData = ({
+  int id,
   String name,
   String fullName,
   double lastWeight,

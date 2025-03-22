@@ -21,7 +21,7 @@ class NextEventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Theme(
-                data: inCardIconTheme,
+                data: ThemeData(iconTheme: mainIcon),
                 child: icon
             ),
             Text('$label:',

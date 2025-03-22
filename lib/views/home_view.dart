@@ -5,10 +5,23 @@ import 'package:puppy_diary/widgets/next_event_card.dart';
 AppViewBuilder homeView = (context, controller, data) => ListView(
   children: <Widget>[
 
+    ElevatedButton(
+        onPressed: () => controller.test(),
+        child: const Icon(Icons.data_object)
+    ),
+
     const NextEventCard(
       icon: Icon(Icons.medical_services_outlined),
       label: 'Next wet visit',
       date: '08.04.2025',
+    ),
+
+    Card(
+      child: Row(
+        children: [
+          Text((data?.name) ?? "null")
+        ],
+      ),
     ),
 
     data == null ? const SizedBox() : const WeightCard(

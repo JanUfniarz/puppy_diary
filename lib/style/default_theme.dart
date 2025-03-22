@@ -22,11 +22,15 @@ ThemeData defaultTheme = ThemeData(
 
   drawerTheme: DrawerThemeData(
     backgroundColor: palette[Col.background],
-    width: 200
+    width: 200,
   ),
 
   cardTheme: CardTheme(
     color:  palette[Col.secondary],
   ),
 
+);
+
+BoxDecoration defaultUADHTheme = BoxDecoration(
+  color: palette[Col.secondary]
 );
