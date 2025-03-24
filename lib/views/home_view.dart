@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/function_types.dart';
 import 'package:puppy_diary/widgets/next_event_card.dart';
 
-AppViewBuilder homeView = (context, controller, data) => ListView(
+AppViewBuilder homeView = (context, controller) => ListView(
   children: <Widget>[
 
     ElevatedButton(
@@ -19,12 +19,12 @@ AppViewBuilder homeView = (context, controller, data) => ListView(
     Card(
       child: Row(
         children: [
-          Text((data?.name) ?? "null")
+          Text((controller.dog?.name) ?? "null")
         ],
       ),
     ),
 
-    data == null ? const SizedBox() : const WeightCard(
+    controller.dog == null ? const SizedBox() : const WeightCard(
       weight: 5.1,
     )
 

@@ -50,4 +50,9 @@ class AppController extends ChangeNotifier {
     ));
     loadData();
   }
+
+  void switchDog(int id) {
+    activeDog = id;
+    notifyListeners();
+  }
 }

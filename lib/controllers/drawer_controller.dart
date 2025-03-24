@@ -9,7 +9,7 @@ typedef DrawerData = ({
 
 extension DrawerController on AppController {
   DrawerData get drawerData {
-    var rest = (List.from(data) as List<DogData>)
+    var rest = (List<DogData>.from(data))
         .map((el) => (
           name: el.name,
           id: el.id

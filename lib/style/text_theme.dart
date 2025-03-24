@@ -12,6 +12,7 @@ TextTheme textDefaultTheme = TextTheme(
     ),
 
     titleLarge: TextStyle(
+        fontSize: 25,
         color: palette[Col.text]
     ),
 

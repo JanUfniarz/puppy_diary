@@ -5,3 +5,8 @@ IconThemeData mainIcon = IconThemeData(
   color: palette[Col.primary],
   size: 40,
 );
+
+IconThemeData appbarIcon = IconThemeData(
+  color: palette[Col.primary],
+  size: 30,
+);

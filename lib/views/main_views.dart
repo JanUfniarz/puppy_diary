@@ -34,8 +34,6 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Consumer<AppController>(
-      builder: (context, controller, _) => _viewBuilder(
-          context, controller, controller.dog
-      ),
+      builder: (context, controller, _) => _viewBuilder(context, controller),
   );
 }

@@ -10,5 +10,4 @@ typedef Transformer = DogData Function(
 typedef AppViewBuilder = Widget Function(
     BuildContext context,
     AppController controller,
-    DogData? data,
 );

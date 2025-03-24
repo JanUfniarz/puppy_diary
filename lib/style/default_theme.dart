@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:puppy_diary/style/icon_theme.dart';
 import 'package:puppy_diary/style/palette.dart';
 import 'package:puppy_diary/style/text_theme.dart';
 
@@ -8,11 +9,11 @@ ThemeData defaultTheme = ThemeData(
   scaffoldBackgroundColor: palette[Col.background],
 
   appBarTheme: AppBarTheme(
-      actionsIconTheme: IconThemeData(
-        color: palette[Col.background]
-      ),
+      iconTheme: appbarIcon,
+      titleTextStyle: textDefaultTheme.titleLarge,
       centerTitle: true,
-      backgroundColor: palette[Col.primary]
+      backgroundColor: palette[Col.background],
+
   ),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
