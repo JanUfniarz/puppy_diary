@@ -9,10 +9,7 @@ class AppController extends ChangeNotifier {
 
   static AppController? _instance;
 
-  static AppController get instance {
-    _instance ??= AppController._();
-    return _instance!;
-  }
+  static AppController get instance => _instance ??= AppController._();
 
   void _initiate(Transformer transformer, IndividualRepository individualRepo) {
     _transformer = transformer;
@@ -38,10 +35,10 @@ class AppController extends ChangeNotifier {
       .then((val) => data = val.map((el) => _transformer(el, ())).toList())
       .then((_) => notifyListeners());
 
-  /// @test
+  /// @te•st
   void test() {
     _individualRepo.insertDog((
-      id: 0,
+      id: -1,
       name: "test1",
       fullName: "full name",
       birthday: DateTime(2020, 1, 4),

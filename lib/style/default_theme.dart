@@ -30,6 +30,23 @@ ThemeData defaultTheme = ThemeData(
     color:  palette[Col.secondary],
   ),
 
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: WidgetStateProperty.all(palette[Col.primary]),
+    )
+  ),
+
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: palette[Col.primary],
+  ),
+
+
+    inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: palette[Col.primary]!, width: 2),
+    ),
+  ),
+
 );
 
 BoxDecoration defaultUADHTheme = BoxDecoration(

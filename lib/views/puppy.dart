@@ -14,8 +14,6 @@ AppViewBuilder puppyView = (context, controller) => Column(
 
     _InfoOrInput<String>(controller.dog?.fullName),
 
-    _InfoOrInput<DateTime>(controller.dog?.birthday),
-
   ],
 );
 

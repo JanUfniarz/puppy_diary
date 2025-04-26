@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:puppy_diary/controllers/app_controller.dart';
 import 'package:puppy_diary/types/function_types.dart';
-import 'package:puppy_diary/views/home_view.dart';
-import 'package:puppy_diary/views/puppy_view.dart';
+import 'package:puppy_diary/views/home.dart';
+import 'package:puppy_diary/views/puppy.dart';
 
 List<MainView> views = [
   MainView(

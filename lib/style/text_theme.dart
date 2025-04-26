@@ -18,6 +18,10 @@ TextTheme textDefaultTheme = TextTheme(
 
     bodyLarge: TextStyle(
         color: palette[Col.text]
-    )
+    ),
+);
 
+TextStyle errorLabel = TextStyle(
+    color: palette[Col.error],
+    fontSize: 20,
 );
