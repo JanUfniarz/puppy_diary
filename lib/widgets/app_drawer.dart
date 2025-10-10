@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/controllers/app_controller.dart';
 import 'package:puppy_diary/controllers/drawer_controller.dart';
+import 'package:puppy_diary/style/decorations.dart';
 import 'package:puppy_diary/style/default_theme.dart';
 import 'package:puppy_diary/style/icon_theme.dart';
-import 'package:puppy_diary/style/palette.dart';
 import 'package:puppy_diary/style/text_theme.dart';
 
 class AppDrawer extends StatelessWidget {
-  final void Function(int id) changeDog;
-  final void Function() addDog;
+  const AppDrawer({super.key});
 
-  const AppDrawer({super.key, required this.changeDog, required this.addDog});
-
-  DrawerData get data => AppController.instance.drawerData;
+  AppController get controller => AppController.instance;
 
   @override
   Widget build(BuildContext context) => Drawer(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        data.active.name != null ? UserAccountsDrawerHeader(
-          accountName: Text(data.active.name!),
-          accountEmail: Text(data.active.fullName ?? ""),
-          decoration: defaultUADHTheme,
+        controller.drawerData.active.name != null ? UserAccountsDrawerHeader(
+          accountName: Text(controller.drawerData.active.name!),
+          accountEmail: Text(controller.drawerData.active.fullName ?? ""),
         ) : const SizedBox(),
 
-        ...data.rest.map((dog) => _ChangeDogButton(
+        ...controller.drawerData.rest.map((dog) => _ChangeDogButton(
           dog.name,
-          onTap: () => changeDog(dog.id),
+          onTap: () => controller.switchDog(dog.id),
         )),
 
-        _AddDogButton(onTap: addDog),
+        _AddDogButton(onTap: () => controller.addDog(context)),
       ],
     ),
   );
@@ -40,19 +36,14 @@ class _ChangeDogButton extends StatelessWidget {
   final void Function()? onTap;
   final String dogName;
 
-  const _ChangeDogButton(this.dogName, {this.onTap, super.key});
+  const _ChangeDogButton(this.dogName, {this.onTap});
 
   @override
   Widget build(BuildContext context) => InkWell(
     onTap: onTap,
     child: Container(
         height: 40,
-        decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(
-              width: 2,
-              color: palette[Col.primary]!
-            ))
-        ),
+        decoration: bottomLine,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(dogName, style: context.texts.bodyLarge,),
@@ -65,7 +56,7 @@ class _ChangeDogButton extends StatelessWidget {
 class _AddDogButton extends StatelessWidget {
   final void Function()? onTap;
 
-  const _AddDogButton({this.onTap, super.key});
+  const _AddDogButton({this.onTap});
 
   @override
   Widget build(BuildContext context) => InkWell(

@@ -1,54 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/style/icon_theme.dart';
-import 'package:puppy_diary/style/palette.dart';
+import 'package:puppy_diary/style/color_scheme.dart';
 import 'package:puppy_diary/style/text_theme.dart';
 
 ThemeData defaultTheme = ThemeData(
+  colorScheme: colorScheme,
   textTheme: textDefaultTheme,
-
-  scaffoldBackgroundColor: palette[Col.background],
 
   appBarTheme: AppBarTheme(
       iconTheme: appbarIcon,
       titleTextStyle: textDefaultTheme.titleLarge,
       centerTitle: true,
-      backgroundColor: palette[Col.background],
 
   ),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: palette[Col.primary],
-    selectedItemColor: palette[Col.secondary]
+    backgroundColor: colorScheme.secondary,
+    selectedItemColor: colorScheme.primary,
+    unselectedItemColor: colorScheme.onPrimary,
   ),
 
-  drawerTheme: DrawerThemeData(
-    backgroundColor: palette[Col.background],
+  drawerTheme: const DrawerThemeData(
     width: 200,
   ),
 
   cardTheme: CardTheme(
-    color:  palette[Col.secondary],
+    color:  colorScheme.secondary,
   ),
 
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: ButtonStyle(
-      foregroundColor: WidgetStateProperty.all(palette[Col.primary]),
-    )
-  ),
-
-  textSelectionTheme: TextSelectionThemeData(
-    cursorColor: palette[Col.primary],
-  ),
-
-
-    inputDecorationTheme: InputDecorationTheme(
-    focusedBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: palette[Col.primary]!, width: 2),
-    ),
-  ),
-
-);
-
-BoxDecoration defaultUADHTheme = BoxDecoration(
-  color: palette[Col.secondary]
 );

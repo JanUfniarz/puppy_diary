@@ -54,7 +54,6 @@ class _AddDogViewState extends State<AddDogView> {
                 },
                 child: const Text('Save')
             ),
-            ElevatedButton(onPressed: () => print(selectedDate.value), child: const Text('test')),
             Text(errorInfo, style: errorLabel),
           ].map((item) => Padding(
               padding: const EdgeInsets.all(20),

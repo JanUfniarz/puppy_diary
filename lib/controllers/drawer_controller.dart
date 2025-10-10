@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:puppy_diary/controllers/app_controller.dart';
+import 'package:puppy_diary/views/push_views/add_dog.dart';
+import 'package:puppy_diary/views/views.dart';
 
 import '../types/data_types.dart';
 
@@ -23,5 +26,24 @@ extension DrawerController on AppController {
     );
   }
 
+  void switchDog(int id) => updateState(() => activeDog = id);
 
+  void addDog(BuildContext context) => pushView<IndividualData>(
+    context, (context) => AddDogView(
+      onSave: (name, fullName, birthDate) {
+        Navigator.pop(context, (
+          id: -1,
+          name: name,
+          fullName: fullName,
+          birthday: birthDate,
+          weightHistory: <Weight>[],
+          eventHistory: <Event>[],
+        ));
+      },
+    )
+  ).then((individual) => individualRepo.insertDog(individual!))
+   .then((individual) {
+     activeDog = individual.id;
+     loadData();
+  });
 }

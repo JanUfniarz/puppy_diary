@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/controllers/app_controller.dart';
-import 'package:puppy_diary/functions/add_dog.dart';
-import 'package:puppy_diary/views/main.dart';
+import 'package:puppy_diary/views/views.dart';
 import 'package:puppy_diary/widgets/app_drawer.dart';
 
 class PuppyDiary extends StatefulWidget {
@@ -26,11 +24,7 @@ class _PuppyDiaryState extends State<PuppyDiary> {
         title: const Text("Puppy Diary"),
       ),
 
-      drawer: AppDrawer(
-        changeDog: (id) => AppController.instance.switchDog(id),
-        addDog: () => newDog(context)
-            .then((dog) => AppController.instance.addDog(dog)),
-      ),
+      drawer: const AppDrawer(),
 
       body: views[currentIndex],
   );

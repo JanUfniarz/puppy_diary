@@ -9,14 +9,14 @@ typedef RawData = ({
   RawList weightHistory
 });
 
-typedef WeightList = List<({DateTime time, double weight})>;
+typedef Weight = ({DateTime time, double weight});
 
 typedef IndividualData = ({
   int id,
   String name,
   String fullName,
   DateTime birthday,
-  WeightList weightHistory,
+  List<Weight> weightHistory,
   List<Event> eventHistory,
 });
 
@@ -27,7 +27,7 @@ typedef DogData = ({
   String name,
   String fullName,
   double lastWeight,
-  WeightList weightHistory,
+  List<Weight> weightHistory,
 });
 
 typedef Event = ({

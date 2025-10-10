@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/database/individual_repository.dart';
-import 'package:puppy_diary/database/sqlite_repository.dart';
 import 'package:puppy_diary/types/data_types.dart';
 import 'package:puppy_diary/types/function_types.dart';
 
@@ -11,33 +10,38 @@ class AppController extends ChangeNotifier {
 
   static AppController get instance => _instance ??= AppController._();
 
-  void _initiate(Transformer transformer, IndividualRepository individualRepo) {
-    _transformer = transformer;
-    _individualRepo = individualRepo;
-    loadData();
-  }
-
   static void initiate(
       Transformer transformer,
       IndividualRepository individualRepo
   ) => instance._initiate(transformer, individualRepo);
 
-  late final Transformer _transformer;
+  void _initiate(Transformer transformer, IndividualRepository individualRepo) {
+    this.transformer = transformer;
+    this.individualRepo = individualRepo;
+    loadData();
+  }
 
-  late final IndividualRepository _individualRepo;
+  late final Transformer transformer;
+
+  late final IndividualRepository individualRepo;
+
   List<DogData> data = [];
-
   int activeDog = 0;
 
   DogData? get dog => data.elementAtOrNull(activeDog);
 
-  void loadData() => _individualRepo.getAll()
-      .then((val) => data = val.map((el) => _transformer(el, ())).toList())
+  void updateState(void Function() callback) {
+    callback();
+    notifyListeners();
+  }
+
+  void loadData() => individualRepo.getAll()
+      .then((val) => data = val.map((el) => transformer(el, ())).toList())
       .then((_) => notifyListeners());
 
-  /// @te•st
+  // @test
   void test() {
-    _individualRepo.insertDog((
+    individualRepo.insertDog((
       id: -1,
       name: "test1",
       fullName: "full name",
@@ -46,10 +50,5 @@ class AppController extends ChangeNotifier {
       weightHistory: [(time: DateTime.now(), weight: 5.1)],
     ));
     loadData();
-  }
-
-  void switchDog(int id) {
-    activeDog = id;
-    notifyListeners();
   }
 }

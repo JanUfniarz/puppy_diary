@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/style/palette.dart';
+import 'package:puppy_diary/style/color_scheme.dart';
 
 IconThemeData mainIcon = IconThemeData(
-  color: palette[Col.primary],
+  color: colorScheme.primary,
   size: 40,
 );
 
 IconThemeData appbarIcon = IconThemeData(
-  color: palette[Col.primary],
+  color: colorScheme.primary,
   size: 30,
 );

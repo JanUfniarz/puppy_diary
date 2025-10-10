@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/style/palette.dart';
+import 'package:puppy_diary/style/color_scheme.dart';
 
 extension Access on BuildContext {
     TextTheme get texts => Theme.of(this).textTheme;
@@ -8,20 +8,20 @@ extension Access on BuildContext {
 TextTheme textDefaultTheme = TextTheme(
 
     titleMedium: TextStyle(
-        color: palette[Col.primary]
+        color: colorScheme.primary
     ),
 
     titleLarge: TextStyle(
         fontSize: 25,
-        color: palette[Col.text]
+        color: colorScheme.primary
     ),
 
     bodyLarge: TextStyle(
-        color: palette[Col.text]
+        color: colorScheme.primary
     ),
 );
 
 TextStyle errorLabel = TextStyle(
-    color: palette[Col.error],
+    color: colorScheme.primary,
     fontSize: 20,
 );
