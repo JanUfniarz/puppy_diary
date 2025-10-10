@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:puppy_diary/controllers/app_controller.dart';
 import 'package:puppy_diary/controllers/drawer_controller.dart';
 import 'package:puppy_diary/style/decorations.dart';
-import 'package:puppy_diary/style/default_theme.dart';
 import 'package:puppy_diary/style/icon_theme.dart';
 import 'package:puppy_diary/style/text_theme.dart';
 
@@ -16,21 +15,34 @@ class AppDrawer extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+
+
         controller.drawerData.active.name != null ? UserAccountsDrawerHeader(
-          accountName: Text(controller.drawerData.active.name!),
-          accountEmail: Text(controller.drawerData.active.fullName ?? ""),
+          accountName: Text(
+            controller.drawerData.active.name!,
+            style: darkLabel,
+          ),
+          accountEmail: Text(
+            controller.drawerData.active.fullName ?? "",
+            style: darkLabel,
+          ),
         ) : const SizedBox(),
+
 
         ...controller.drawerData.rest.map((dog) => _ChangeDogButton(
           dog.name,
           onTap: () => controller.switchDog(dog.id),
         )),
 
+
         _AddDogButton(onTap: () => controller.addDog(context)),
       ],
     ),
   );
 }
+
+
+
 
 class _ChangeDogButton extends StatelessWidget {
   final void Function()? onTap;
@@ -51,6 +63,8 @@ class _ChangeDogButton extends StatelessWidget {
     ),
   );
 }
+
+
 
 
 class _AddDogButton extends StatelessWidget {

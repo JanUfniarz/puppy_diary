@@ -26,7 +26,7 @@ typedef DogData = ({
   int id,
   String name,
   String fullName,
-  double lastWeight,
+  double? lastWeight,
   List<Weight> weightHistory,
 });
 

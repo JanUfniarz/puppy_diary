@@ -23,6 +23,7 @@ class IndividualRepository
   Future<IndividualData> insertDog(IndividualData dog) async => await (
       await database
   ).transaction((txn) async {
+    print("=======|||||||Inserting dog: $dog");
     bool isNew = dog.id == -1;
     var data = toRaw(dog);
 

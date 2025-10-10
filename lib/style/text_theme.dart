@@ -11,17 +11,16 @@ TextTheme textDefaultTheme = TextTheme(
         color: colorScheme.primary
     ),
 
-    titleLarge: TextStyle(
+    titleLarge: const TextStyle(
         fontSize: 25,
-        color: colorScheme.primary
-    ),
-
-    bodyLarge: TextStyle(
-        color: colorScheme.primary
     ),
 );
 
 TextStyle errorLabel = TextStyle(
-    color: colorScheme.primary,
+    color: colorScheme.error,
     fontSize: 20,
+);
+
+TextStyle darkLabel = TextStyle(
+    color: colorScheme.onPrimary,
 );

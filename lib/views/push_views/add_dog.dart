@@ -18,47 +18,71 @@ class _AddDogViewState extends State<AddDogView> {
   String? name;
   String? fullName;
 
+
+
+  late final List<({String label, void Function(String) onChanged})> _textFieldsData = [
+    (
+      label: 'Name',
+      onChanged: (text) => setState(() => name = text)
+    ),
+    (
+      label: 'Full Name',
+      onChanged: (text) => setState(() => fullName = text)
+    ),
+  ];
+
+
+
+  Column _elementsArrangement(List<Widget> elements) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: elements.map((item) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: item
+    )).toList(),
+  );
+
+
+
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: _elementsArrangement([
+
+        // TextFields
+        ...List.generate(_textFieldsData.length, (index) => TextField(
+          onChanged: _textFieldsData[index].onChanged,
+          decoration: InputDecoration(
+            label: Text(
+              _textFieldsData[index].label,
+              style: context.texts.titleLarge,
+            ),
+          ),
+        )),
+
+
+        // DatePicker
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ...List.generate(2, (index) => TextField(
-              onChanged: (text) => setState([
-                    () => name = text,
-                    () => fullName = text,
-              ][index]),
-              decoration: InputDecoration(
-                label: Text(
-                  ['Name', 'Full Name'][index],
-                  style: context.texts.titleLarge,
-                ),
-              ),
-            )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Birthday',
-                  style: context.texts.titleLarge,
-                ),
-                DatePicker(selectedDate),
-              ],
+            Text(
+              'Birthday',
+              style: context.texts.titleLarge,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  if (name == null) setState(() {
-                    errorInfo = 'Name is required!';
-                  });
-                  else widget.onSave(name!, fullName ??= name!, selectedDate.value);
-                },
-                child: const Text('Save')
-            ),
-            Text(errorInfo, style: errorLabel),
-          ].map((item) => Padding(
-              padding: const EdgeInsets.all(20),
-              child: item
-          )).toList()
-      )
+            DatePicker(selectedDate),
+          ],
+        ),
+
+
+        // Save Button
+        ElevatedButton(
+            onPressed: () {
+              if (name == null) setState(() => errorInfo = 'Name is required!');
+              else widget.onSave(name!, fullName ??= name!, selectedDate.value);
+            },
+            child: const Text('Save')
+        ),
+
+
+        Text(errorInfo, style: errorLabel),
+      ])
   );
 }
