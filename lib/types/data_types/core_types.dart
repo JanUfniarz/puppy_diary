@@ -1,4 +1,4 @@
-import 'package:puppy_diary/types/enums.dart';
+import 'package:puppy_diary/types/enums/event_type.dart';
 
 typedef RawObject = Map<String, dynamic>;
 typedef RawList = List<RawObject>;
@@ -22,16 +22,9 @@ typedef IndividualData = ({
 
 typedef RaceData = ();
 
-typedef DogData = ({
-  int id,
-  String name,
-  String fullName,
-  double? lastWeight,
-  List<Weight> weightHistory,
-});
-
 typedef Event = ({
   DateTime time,
   bool done,
   EventType type,
+  String note,
 });

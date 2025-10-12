@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/controllers/puppy_view_controller.dart';
 import 'package:puppy_diary/types/function_types.dart';
 
 AppViewBuilder puppyView = (context, controller) => Column(

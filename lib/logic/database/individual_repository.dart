@@ -1,6 +1,6 @@
-import 'package:puppy_diary/database/individual_converter.dart';
-import 'package:puppy_diary/database/sqlite_repository.dart';
-import 'package:puppy_diary/types/data_types.dart';
+import 'package:puppy_diary/logic/database/individual_converter.dart';
+import 'package:puppy_diary/logic/database/sqlite_repository.dart';
+import 'package:puppy_diary/types/data_types/core_types.dart';
 
 class IndividualRepository
     extends SQLiteRepository
@@ -23,7 +23,6 @@ class IndividualRepository
   Future<IndividualData> insertDog(IndividualData dog) async => await (
       await database
   ).transaction((txn) async {
-    print("=======|||||||Inserting dog: $dog");
     bool isNew = dog.id == -1;
     var data = toRaw(dog);
 

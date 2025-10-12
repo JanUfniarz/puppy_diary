@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/controllers/app_controller.dart';
-import 'package:puppy_diary/controllers/drawer_controller.dart';
-import 'package:puppy_diary/style/decorations.dart';
-import 'package:puppy_diary/style/icon_theme.dart';
-import 'package:puppy_diary/style/text_theme.dart';
+import 'package:puppy_diary/logic/controllers/app_controller.dart';
+import 'package:puppy_diary/logic/controllers/drawer_controller.dart';
+import 'package:puppy_diary/ui/style/decorations.dart';
+import 'package:puppy_diary/ui/style/icon_theme.dart';
+import 'package:puppy_diary/ui/style/text_theme.dart';
+import 'package:puppy_diary/ui/views/push_views/add_dog.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -35,7 +36,12 @@ class AppDrawer extends StatelessWidget {
         )),
 
 
-        _AddDogButton(onTap: () => controller.addDog(context)),
+        _AddDogButton(
+          onTap: () => pushAddDogView(context)
+            .then((val) {
+              if (val != null) controller.addDog(val);
+            })
+        ),
       ],
     ),
   );

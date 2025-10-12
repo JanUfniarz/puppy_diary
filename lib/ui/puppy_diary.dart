@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/views/views.dart';
-import 'package:puppy_diary/widgets/app_drawer.dart';
+import 'package:puppy_diary/ui/views/views.dart';
+import 'package:puppy_diary/ui/widgets/app_drawer.dart';
 
 class PuppyDiary extends StatefulWidget {
   const PuppyDiary({super.key});

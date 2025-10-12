@@ -48,6 +48,7 @@ class SQLiteRepository {
               time TEXT NOT NULL,
               done BOOLEAN NOT NULL,
               type TEXT NOT NULL,
+              note TEXT NOT NULL,
               individual_id INTEGER NOT NULL,
               FOREIGN KEY (individual_id) REFERENCES individuals (id) ON DELETE CASCADE
           );

@@ -1,5 +1,5 @@
-import 'package:puppy_diary/types/data_types.dart';
-import 'package:puppy_diary/types/enums.dart';
+import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/types/enums/event_type.dart';
 
 mixin IndividualConverter {
   RawData toRaw(IndividualData val) => (
@@ -17,7 +17,8 @@ mixin IndividualConverter {
       'individual_id': val.id,
       'time': el.time.toIso8601String(),
       'done': el.done,
-      'type': el.type.toString()
+      'type': el.type.toString(),
+      'note': el.note,
     }).toList()
   );
 
@@ -33,7 +34,8 @@ mixin IndividualConverter {
       eventHistory: data.eventHistory.map((event) => (
         time: _parse(event['time']),
         done: event['done'] as bool,
-        type: EventType.fromString(event['type'] as String)
+        type: EventType.fromString(event['type'] as String),
+        note: event['note'] as String
       )).toList(),
   );
 

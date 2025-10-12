@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/style/icon_theme.dart';
-import 'package:puppy_diary/style/color_scheme.dart';
-import 'package:puppy_diary/style/text_theme.dart';
+import 'package:puppy_diary/ui/style/icon_theme.dart';
+import 'package:puppy_diary/ui/style/color_scheme.dart';
+import 'package:puppy_diary/ui/style/text_theme.dart';
 
 ThemeData defaultTheme = ThemeData(
   colorScheme: colorScheme,
@@ -27,5 +27,10 @@ ThemeData defaultTheme = ThemeData(
   cardTheme: CardTheme(
     color:  colorScheme.secondary,
   ),
+
+  dividerTheme: DividerThemeData(
+    color: colorScheme.primary,
+    thickness: 2,
+  )
 
 );

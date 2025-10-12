@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/controllers/app_controller.dart';
-import 'package:puppy_diary/types/data_types.dart';
-
-typedef Transformer = DogData Function(
-    IndividualData individualData,
-    RaceData raceData,
-);
+import 'package:puppy_diary/logic/controllers/app_controller.dart';
 
 typedef AppViewBuilder = Widget Function(
     BuildContext context,
