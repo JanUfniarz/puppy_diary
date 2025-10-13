@@ -16,8 +16,12 @@ class NextEventCard extends StatelessWidget {
     super.key,
   }) : icon = nextEvent?.type.icon,
        label = nextEvent?.type.label ?? 'No upcoming events',
-       date = nextEvent?.time.toString(),
+       date = dateFormat(nextEvent?.time),
        isEmpty = nextEvent == null;
+
+
+  static String dateFormat(DateTime? date) => "${date?.day}.${date?.month}.${date?.year}";
+
 
 
   @override
