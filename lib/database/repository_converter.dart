@@ -3,8 +3,9 @@ import 'package:puppy_diary/types/enums/event_type.dart';
 
 mixin RepositoryConverter {
 
-  RawData individualToRaw(IndividualData val) => (
+  RawData individualToRaw(Dog val) => (
     dog: {
+      if (val.id != -1) 'id': val.id,
       'name': val.name,
       'full_name': val.fullName,
       'birthday': val.birthday.toIso8601String(),
@@ -19,12 +20,14 @@ mixin RepositoryConverter {
 
 
   RawObject weightToRaw(Weight weight, int individualID) => {
+    if (weight.id != -1) 'id': weight.id,
     'individual_id': individualID,
     'time': weight.time.toIso8601String(),
     'weight': weight.weight,
   };
 
   RawObject eventToRaw(Event event, int individualID) => {
+    if (event.id != -1) 'id': event.id,
     'individual_id': individualID,
     'time': event.time.toIso8601String(),
     'done': event.done ? 1 : 0,
@@ -33,7 +36,7 @@ mixin RepositoryConverter {
   };
 
 
-  IndividualData individualFromRaw(RawData raw) => (
+  Dog individualFromRaw(RawData raw) => (
       id: raw.dog['id'] as int,
       name: raw.dog['name'] as String,
       fullName: raw.dog['full_name'] as String,
@@ -47,11 +50,13 @@ mixin RepositoryConverter {
   );
 
   Weight weightFromRaw(RawObject raw) => (
+    id: raw['id'] as int,
     time: _parse(raw['time']),
     weight: raw['weight'] as double
   );
 
   Event eventFromRaw(RawObject raw) => (
+    id: raw['id'] as int,
     time: _parse(raw['time']),
     done: raw['done'] == 1,
     type: EventType.fromString(raw['type'] as String),

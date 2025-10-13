@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/ui/helpers/date_format.dart';
+import 'package:puppy_diary/ui/widgets/outlined_card.dart';
+
+class EventItem extends StatefulWidget {
+  final Event event;
+  final ({
+  void Function() done,
+  void Function() edit,
+  void Function() delete
+  }) actions;
+
+  const EventItem(this.event, {super.key, required this.actions});
+
+  @override
+  State<EventItem> createState() => _EventItemState();
+}
+
+class _EventItemState extends State<EventItem> {
+  bool _isExpanded = false;
+
+
+  List<Widget> actionButtons() => [
+
+    FilledButton.icon(
+        onPressed: widget.actions.edit,
+        icon: const Icon(Icons.edit),
+        label: const Text('Edit')
+    ),
+
+    FilledButton.icon(
+      onPressed: widget.actions.delete,
+      icon: const Icon(Icons.delete),
+      label: const Text('Delete'),
+      style: FilledButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.errorContainer,
+      ),
+    ),
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    ListTile info = ListTile(
+        leading: Icon(widget.event.type.icon),
+
+        title: Text(
+            widget.event.type.label,
+            style: Theme.of(context).textTheme.titleMedium
+        ),
+
+        subtitle: Text(userFormat(widget.event.time)),
+
+        trailing: InkWell(
+          onTap: widget.actions.done,
+          child: widget.event.done
+              ? const Icon(Icons.check_box)
+              : const Icon(Icons.check_box_outline_blank),
+        )
+    );
+
+
+    return InkWell(
+      onTap: () => setState(() => _isExpanded = !_isExpanded),
+      child: Column(
+        children: [
+
+          info,
+
+          if (_isExpanded && widget.event.note.isNotEmpty) Padding(
+            padding: const EdgeInsets.all(4),
+            child: OutlinedCard(
+              child: Text(widget.event.note),
+            ),
+          ),
+
+          if (_isExpanded) Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: actionButtons(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

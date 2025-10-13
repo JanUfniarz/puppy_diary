@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/data_types/utility_types.dart';
-import 'package:puppy_diary/ui/form.dart';
+import 'package:puppy_diary/ui/helpers/form.dart';
 import 'package:puppy_diary/ui/style/text_theme.dart';
 import 'package:puppy_diary/ui/views/views.dart';
 import 'package:puppy_diary/ui/widgets/date_picker.dart';
 
 
-Future<AddDogViewResult?> pushAddDogView(
-    BuildContext context) => pushView<AddDogViewResult>(
+Future<AddDogVR?> pushAddDogView(
+    BuildContext context) => pushView<AddDogVR>(
   context, (_) => _AddDogView()
 );
 

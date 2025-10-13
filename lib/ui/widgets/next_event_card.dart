@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/ui/helpers/date_format.dart';
 import 'package:puppy_diary/ui/style/icon_theme.dart';
 
 class NextEventCard extends StatelessWidget {
@@ -16,17 +18,12 @@ class NextEventCard extends StatelessWidget {
     super.key,
   }) : icon = nextEvent?.type.icon,
        label = nextEvent?.type.label ?? 'No upcoming events',
-       date = dateFormat(nextEvent?.time),
+       date = nextEvent == null ? null : userFormat(nextEvent.time),
        isEmpty = nextEvent == null;
-
-
-  static String dateFormat(DateTime? date) => "${date?.day}.${date?.month}.${date?.year}";
-
 
 
   @override
   Widget build(BuildContext context) {
-    print("isEmpty: $isEmpty");
     var content = <Widget>[
       if (!isEmpty) Theme(
           data: ThemeData(iconTheme: mainIcon),

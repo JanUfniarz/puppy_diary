@@ -1,6 +1,6 @@
 import 'package:puppy_diary/types/data_types/core_types.dart';
 
-extension DogData on IndividualData {
+extension DogData on Dog {
   double? get lastWeight => weightHistory.isEmpty
       ? null
       : weightHistory.reduce(

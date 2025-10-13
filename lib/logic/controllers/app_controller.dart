@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/logic/database/individual_repository.dart';
+import 'package:puppy_diary/database/individual_repository.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
 import 'package:puppy_diary/types/data_types/utility_types.dart';
 
@@ -23,11 +23,11 @@ class AppController extends ChangeNotifier {
 
   late final IndividualRepository individualRepo;
 
-  List<IndividualData> data = [];
+  List<Dog> data = [];
 
   int activeDogIndex = 0;
 
-  IndividualData? get dog => data.elementAtOrNull(activeDogIndex);
+  Dog? get dog => data.elementAtOrNull(activeDogIndex);
 
 
   void updateState(void Function() callback) {
@@ -47,13 +47,21 @@ class AppController extends ChangeNotifier {
   }
 
 
-  void addEvent(AddEventViewResult val) => individualRepo.insertEvent(
+  void addEvent(AddEventVR val) => individualRepo.insertEvent(
       dog!.id,
       (
+        id: -1,
         time: val.time,
         done: false,
         type: val.type,
         note: val.note,
       )
   ).then((_) => loadData());
+
+  void update(object) => switch (object) {
+    Dog dog => individualRepo.updateDog(dog),
+    Weight weight => individualRepo.updateWeight(weight, dog!.id),
+    Event event => individualRepo.updateEvent(event, dog!.id),
+    _ => throw Exception("Type not supported")
+  };
 }

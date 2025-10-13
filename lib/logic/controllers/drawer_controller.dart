@@ -4,7 +4,7 @@ import 'package:puppy_diary/types/data_types/utility_types.dart';
 
 extension DrawerController on AppController {
   DrawerData get drawerData {
-    var rest = (List<IndividualData>.from(data))
+    var rest = (List<Dog>.from(data))
         .map((el) => (
           name: el.name,
           id: el.id
@@ -22,7 +22,7 @@ extension DrawerController on AppController {
           () => activeDogIndex = data.indexWhere((dog) => dog.id == id)
   );
 
-  void addDog(AddDogViewResult res) =>  individualRepo.insertDog(
+  void addDog(AddDogVR res) =>  individualRepo.insertDog(
       (
         id: -1,
         name: res.name,
