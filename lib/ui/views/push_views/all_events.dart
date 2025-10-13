@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/logic/controllers/app_controller.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/ui/widgets/sheets/bottom_sheet.dart';
 import 'package:puppy_diary/ui/views/views.dart';
 import 'package:puppy_diary/ui/widgets/event_item.dart';
+import 'package:puppy_diary/ui/widgets/sheets/confirm_delete.dart';
 
 Future<AllEventsVR> pushAllEventsView(
     BuildContext context,
@@ -38,6 +40,18 @@ class _AllEventsViewState extends State<_AllEventsView> {
   void save(Event event) => AppController.instance.update(event);
 
 
+  switchDone(int index) {
+    var e = events[index];
+    setState(() {
+      events[index] = (
+        id: e.id, time: e.time, done: !e.done,
+        type: e.type, note: e.note
+      );
+    });
+    save(events[index]);
+  }
+
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -48,18 +62,14 @@ class _AllEventsViewState extends State<_AllEventsView> {
         itemBuilder: (context, index) => EventItem(
             events[index],
             actions: (
-              done: () {
-                var e = events[index];
-                setState(() {
-                  events[index] = (
-                    id: e.id, time: e.time, done: !e.done,
-                    type: e.type, note: e.note
-                  );
-                });
-                save(events[index]);
-              },
+
+              done: () => switchDone(index),
+
               edit: () {},
-              delete: () {}
+
+              delete: () => confirmDeleteSheet(context)
+                  .then((isConfirmed) => print(isConfirmed))
+
             )
         ),
       ),

@@ -7,6 +7,10 @@ extension Access on BuildContext {
 
 TextTheme textDefaultTheme = TextTheme(
 
+    bodyLarge: const TextStyle(
+        fontSize: 20,
+    ),
+
     titleMedium: TextStyle(
         color: colorScheme.primary
     ),

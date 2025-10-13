@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
 import 'package:puppy_diary/ui/helpers/date_format.dart';
+import 'package:puppy_diary/ui/widgets/buttons/delete_button.dart';
 import 'package:puppy_diary/ui/widgets/outlined_card.dart';
 
 class EventItem extends StatefulWidget {
@@ -29,13 +30,8 @@ class _EventItemState extends State<EventItem> {
         label: const Text('Edit')
     ),
 
-    FilledButton.icon(
-      onPressed: widget.actions.delete,
-      icon: const Icon(Icons.delete),
-      label: const Text('Delete'),
-      style: FilledButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.errorContainer,
-      ),
+    DeleteButton(
+        onPressed: widget.actions.delete
     ),
   ];
 
