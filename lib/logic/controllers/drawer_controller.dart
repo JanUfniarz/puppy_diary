@@ -10,7 +10,7 @@ extension DrawerController on AppController {
           id: el.id
         ))
         .toList();
-    if (rest.isNotEmpty) rest.removeAt(activeDogID);
+    if (rest.isNotEmpty) rest.removeAt(activeDogIndex);
 
     return (
       active: (name: dog?.name, fullName: dog?.fullName),
@@ -18,7 +18,9 @@ extension DrawerController on AppController {
     );
   }
 
-  void switchDog(int id) => updateState(() => activeDogID = id);
+  void switchDog(int id) => updateState(
+          () => activeDogIndex = data.indexWhere((dog) => dog.id == id)
+  );
 
   void addDog(AddDogViewResult res) =>  individualRepo.insertDog(
       (
@@ -29,8 +31,8 @@ extension DrawerController on AppController {
         weightHistory: <Weight>[],
         eventHistory: <Event>[],
       )
-  ).then((individual) {
-     activeDogID = individual.id;
+  ).then((_) {
+     activeDogIndex = data.length;
      loadData();
   });
 }

@@ -66,7 +66,7 @@ class _AddEventViewState extends State<_AddEventView> with FormElements {
         ),
         (
           label: 'Date',
-          child: DatePicker(selectedDate),
+          child: DatePicker(selectedDate, scope: DatePickerScope.future),
         )
       ]),
 

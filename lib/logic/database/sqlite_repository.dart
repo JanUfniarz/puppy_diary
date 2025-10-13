@@ -1,6 +1,5 @@
-import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class SQLiteRepository {
   static Database? _database;
@@ -46,7 +45,7 @@ class SQLiteRepository {
           CREATE TABLE event_history (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               time TEXT NOT NULL,
-              done BOOLEAN NOT NULL,
+              done INTEGER NOT NULL,
               type TEXT NOT NULL,
               note TEXT NOT NULL,
               individual_id INTEGER NOT NULL,

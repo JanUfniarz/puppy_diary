@@ -1,10 +1,11 @@
-import 'package:puppy_diary/logic/database/individual_converter.dart';
+import 'package:puppy_diary/logic/database/repository_converter.dart';
 import 'package:puppy_diary/logic/database/sqlite_repository.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
 
 class IndividualRepository
     extends SQLiteRepository
-    with IndividualConverter {
+    with RepositoryConverter {
+
 
   Future<List<IndividualData>> getAll() async {
     var db = await database;
@@ -13,18 +14,21 @@ class IndividualRepository
     var events = await db.query('event_history');
     var dogs = await db.query('dogs');
 
-    return dogs.map((dog) => fromRaw((
+    return dogs.map((dog) => individualFromRaw((
       dog: dog,
       weightHistory: _filter(weights, dog),
       eventHistory: _filter(events, dog),
     ))).toList();
   }
 
+
+
+
   Future<IndividualData> insertDog(IndividualData dog) async => await (
       await database
   ).transaction((txn) async {
     bool isNew = dog.id == -1;
-    var data = toRaw(dog);
+    var data = individualToRaw(dog);
 
     int id = await txn.insert('dogs', data.dog);
 
@@ -39,12 +43,32 @@ class IndividualRepository
     }
     if (isNew) data.dog['id'] = id;
 
-    return fromRaw(data);
+    return individualFromRaw(data);
   });
+
+
+
+
+  Future<void> insertEvent(int individualID, Event event) async => (
+      await database
+  ).insert('event_history', eventToRaw(event, individualID));
+
+
+
+
+  Future<void> insertWeight(int individualID, Weight weight) async => (
+      await database
+  ).insert('weight_history', weightToRaw(weight, individualID));
+
+
+
 
   Future<void> update(int id, RawObject data, {String table = 'dogs'}) async => (
       await database
   ).update(table, data, where: 'id = ?', whereArgs: [id]);
+
+
+
 
   RawList _filter(RawList original, RawObject dog) => original
       .where((el) => el['individual_id'] == dog['id'])

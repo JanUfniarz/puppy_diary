@@ -21,8 +21,7 @@ AppViewBuilder homeView = (context, controller) => ListView(
 
         onAddEventPressed: () => pushAddEventView(context)
             .then((val) {
-              // todo redirect to controller
-              return UnimplementedError();
+              if (val != null) controller.addEvent(val);
             })
     )
 

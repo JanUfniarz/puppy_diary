@@ -22,7 +22,7 @@ class NextEventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    print("isEmpty: $isEmpty");
     var content = <Widget>[
       if (!isEmpty) Theme(
           data: ThemeData(iconTheme: mainIcon),

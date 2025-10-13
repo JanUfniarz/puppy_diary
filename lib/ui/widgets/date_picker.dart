@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 
-class DatePicker extends StatefulWidget {
-  const DatePicker(this.selectedDate, {super.key});
+enum DatePickerScope {
+  past,
+  future,
+  both
+}
 
+class DatePicker extends StatefulWidget {
+  DatePicker(this.selectedDate, {
+    DatePickerScope scope = DatePickerScope.both,
+    super.key
+  }) {
+    // ignore: prefer_initializing_formals
+    DatePicker.scope = scope;
+  }
+
+  static late DatePickerScope scope;
   final String restorationId = 'Birth Date';
   final RestorableDateTime selectedDate;
 
@@ -26,18 +39,28 @@ class _DatePickerState extends State<DatePicker>
   );
 
   static Route<DateTime> _datePickerRoute(
-      BuildContext context,
-      Object? arguments,
-      ) => DialogRoute<DateTime>(
+    BuildContext context,
+    Object? arguments,
+  ) {
+
+    (DateTime, DateTime) range  = switch (DatePicker.scope) {
+      DatePickerScope.past => (DateTime(2000), DateTime.now()),
+      DatePickerScope.future => (DateTime.now(), DateTime(2101)),
+      DatePickerScope.both => (DateTime(2000), DateTime(2101)),
+    };
+
+    return DialogRoute<DateTime>(
       context: context,
-      builder: (BuildContext context) => DatePickerDialog(
-          restorationId: 'date_picker_dialog',
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(2021),
-          lastDate: DateTime.now(),
-        ),
+      builder: (BuildContext context) =>
+          DatePickerDialog(
+            restorationId: 'date_picker_dialog',
+            initialEntryMode: DatePickerEntryMode.calendarOnly,
+            initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
+            firstDate: range.$1,
+            lastDate: range.$2,
+          ),
     );
+  }
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {

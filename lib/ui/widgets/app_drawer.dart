@@ -32,7 +32,10 @@ class AppDrawer extends StatelessWidget {
 
         ...controller.drawerData.rest.map((dog) => _ChangeDogButton(
           dog.name,
-          onTap: () => controller.switchDog(dog.id),
+          onTap: () {
+            controller.switchDog(dog.id);
+            Navigator.pop(context);
+          },
         )),
 
 
@@ -40,7 +43,7 @@ class AppDrawer extends StatelessWidget {
           onTap: () => pushAddDogView(context)
             .then((val) {
               if (val != null) controller.addDog(val);
-            })
+            }).then((_) => Navigator.pop(context))
         ),
       ],
     ),

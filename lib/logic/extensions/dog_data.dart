@@ -11,9 +11,15 @@ extension DogData on IndividualData {
       ? null
       : upcomingEvents.reduce((x, y) => x.time.isBefore(y.time) ? x : y);
 
-  List<Event> get upcomingEvents => eventHistory
-      .where((event) => !event.done && event.time.isAfter(DateTime.now()))
+  List<Event> get upcomingEvents {
+
+    final now = DateTime.now();
+    final todayStart = DateTime(now.year, now.month, now.day);
+
+    return eventHistory
+      .where((event) => !event.done && event.time.isAfter(todayStart))
       .toList();
+  }
 
 }
 

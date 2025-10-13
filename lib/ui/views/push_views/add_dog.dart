@@ -47,7 +47,7 @@ class _AddDogViewState extends State<_AddDogView> with FormElements {
         ...inputList(context, [
           (
             label: 'Birthday',
-            child: DatePicker(selectedDate),
+            child: DatePicker(selectedDate, scope: DatePickerScope.past),
           )
         ]),
 
@@ -55,9 +55,12 @@ class _AddDogViewState extends State<_AddDogView> with FormElements {
         ElevatedButton(
             onPressed: () {
               if (name == null) setState(() => errorInfo = 'Name is required!');
-              else Navigator.pop(
-                  context,
-                  (name!, fullName ??= name!, selectedDate.value)
+              else Navigator.pop(context,
+                  (
+                    name: name!,
+                    fullName: fullName ??= name!,
+                    birthDate: selectedDate.value
+                  )
               );
             },
             child: const Text('Save')
