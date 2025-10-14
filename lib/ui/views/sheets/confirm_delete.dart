@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/ui/widgets/buttons/delete_button.dart';
-import 'package:puppy_diary/ui/widgets/sheets/bottom_sheet.dart';
+import 'package:puppy_diary/ui/views/sheets/bottom_sheet.dart';
 
 Future<bool?> confirmDeleteSheet(BuildContext context) => bottomSheet<bool>(
     context,

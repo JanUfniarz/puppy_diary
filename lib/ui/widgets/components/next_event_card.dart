@@ -44,7 +44,7 @@ class NextEventCard extends StatelessWidget {
 
     var buttons = <Widget>[
 
-      if (!isEmpty) FilledButton(
+      FilledButton(
           onPressed: onAllEventsPressed,
           child: const Row(
             children: [

@@ -3,7 +3,7 @@ import 'package:puppy_diary/logic/extensions/dog_data.dart';
 import 'package:puppy_diary/types/function_types.dart';
 import 'package:puppy_diary/ui/views/push_views/add_event.dart';
 import 'package:puppy_diary/ui/views/push_views/all_events.dart';
-import 'package:puppy_diary/ui/widgets/next_event_card.dart';
+import 'package:puppy_diary/ui/widgets/components/next_event_card.dart';
 
 AppViewBuilder homeView = (context, controller) => ListView(
   children: <Widget>[
@@ -19,7 +19,7 @@ AppViewBuilder homeView = (context, controller) => ListView(
         controller.dog!.nextEvent,
 
         onAllEventsPressed: () => pushAllEventsView(context, controller.dog!.eventHistory)
-            .then((_) {}),
+            .then((_) => controller.loadData()),
 
         onAddEventPressed: () => pushAddEventView(context)
             .then((val) {

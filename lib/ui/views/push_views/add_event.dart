@@ -4,7 +4,7 @@ import 'package:puppy_diary/types/enums/event_type.dart';
 import 'package:puppy_diary/ui/helpers/form.dart';
 import 'package:puppy_diary/ui/style/icon_theme.dart';
 import 'package:puppy_diary/ui/views/views.dart';
-import 'package:puppy_diary/ui/widgets/date_picker.dart';
+import 'package:puppy_diary/ui/widgets/elements/date_picker.dart';
 
 Future<AddEventVR?> pushAddEventView(
     BuildContext context

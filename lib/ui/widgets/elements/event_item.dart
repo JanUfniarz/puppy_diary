@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
 import 'package:puppy_diary/ui/helpers/date_format.dart';
 import 'package:puppy_diary/ui/widgets/buttons/delete_button.dart';
-import 'package:puppy_diary/ui/widgets/outlined_card.dart';
+import 'package:puppy_diary/ui/widgets/decorators/outlined_card.dart';
 
 class EventItem extends StatefulWidget {
   final Event event;

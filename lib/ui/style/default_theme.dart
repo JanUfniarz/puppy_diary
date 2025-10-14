@@ -24,7 +24,7 @@ ThemeData defaultTheme = ThemeData(
     width: 200,
   ),
 
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color:  colorScheme.secondary,
   ),
 

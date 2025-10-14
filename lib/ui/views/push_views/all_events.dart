@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/logic/controllers/app_controller.dart';
 import 'package:puppy_diary/types/data_types/core_types.dart';
-import 'package:puppy_diary/ui/widgets/sheets/bottom_sheet.dart';
 import 'package:puppy_diary/ui/views/views.dart';
-import 'package:puppy_diary/ui/widgets/event_item.dart';
-import 'package:puppy_diary/ui/widgets/sheets/confirm_delete.dart';
+import 'package:puppy_diary/ui/widgets/elements/event_item.dart';
+import 'package:puppy_diary/ui/views/sheets/confirm_delete.dart';
 
 Future<AllEventsVR> pushAllEventsView(
     BuildContext context,
@@ -37,10 +36,7 @@ class _AllEventsViewState extends State<_AllEventsView> {
   }
 
 
-  void save(Event event) => AppController.instance.update(event);
-
-
-  switchDone(int index) {
+  _switchDone(int index) {
     var e = events[index];
     setState(() {
       events[index] = (
@@ -48,8 +44,19 @@ class _AllEventsViewState extends State<_AllEventsView> {
         type: e.type, note: e.note
       );
     });
-    save(events[index]);
+    AppController.instance.update(events[index]);
   }
+
+
+  _delete(Event event) {
+    setState(() => events.remove(event));
+    AppController.instance.delete(event);
+  }
+
+
+  Widget get emptyView => const Center(
+    child: Text('Your dog has no events.'),
+  );
 
 
   @override
@@ -57,18 +64,20 @@ class _AllEventsViewState extends State<_AllEventsView> {
       appBar: AppBar(
         title: const Text('All Events'),
       ),
-      body: ListView.builder(
+      body: events.isEmpty ? emptyView : ListView.builder(
         itemCount: events.length,
         itemBuilder: (context, index) => EventItem(
             events[index],
             actions: (
 
-              done: () => switchDone(index),
+              done: () => _switchDone(index),
 
               edit: () {},
 
               delete: () => confirmDeleteSheet(context)
-                  .then((isConfirmed) => print(isConfirmed))
+                  .then((isConfirmed) {
+                    if (isConfirmed ?? false) _delete(events[index]);
+                  })
 
             )
         ),

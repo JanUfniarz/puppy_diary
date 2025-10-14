@@ -58,10 +58,19 @@ class AppController extends ChangeNotifier {
       )
   ).then((_) => loadData());
 
+
   void update(object) => switch (object) {
     Dog dog => individualRepo.updateDog(dog),
     Weight weight => individualRepo.updateWeight(weight, dog!.id),
     Event event => individualRepo.updateEvent(event, dog!.id),
+    _ => throw Exception("Type not supported")
+  };
+
+
+  void delete(object) => switch (object) {
+    Dog dog => individualRepo.deleteDog(dog.id),
+    Weight weight => individualRepo.deleteWeight(weight.id),
+    Event event => individualRepo.deleteEvent(event.id),
     _ => throw Exception("Type not supported")
   };
 }

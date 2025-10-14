@@ -98,4 +98,23 @@ class IndividualRepository
   RawList _filter(RawList original, RawObject dog) => original
       .where((el) => el['individual_id'] == dog['id'])
       .toList();
+
+
+  Future<void> deleteDog(int id) async => (
+      await database
+  ).transaction((txn) async {
+    await txn.delete('dogs', where: 'id = ?', whereArgs: [id]);
+    await txn.delete('event_history', where: 'individual_id = ?', whereArgs: [id]);
+    await txn.delete('weight_history', where: 'individual_id = ?', whereArgs: [id]);
+  });
+
+
+  Future<void> deleteEvent(int id) async => (
+      await database
+  ).delete('event_history', where: 'id = ?', whereArgs: [id]);
+
+
+  Future<void> deleteWeight(int id) async => (
+      await database
+  ).delete('weight_history', where: 'id = ?', whereArgs: [id]);
 }
