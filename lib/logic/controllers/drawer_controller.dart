@@ -1,6 +1,7 @@
 import 'package:puppy_diary/logic/controllers/app_controller.dart';
-import 'package:puppy_diary/types/data_types/core_types.dart';
-import 'package:puppy_diary/types/data_types/utility_types.dart';
+import 'package:puppy_diary/types/data_types/view_results.dart';
+import 'package:puppy_diary/types/data_types/widgets_data.dart';
+import 'package:puppy_diary/types/entities/dog.dart';
 
 extension DrawerController on AppController {
   DrawerData get drawerData {
@@ -23,13 +24,10 @@ extension DrawerController on AppController {
   );
 
   void addDog(AddDogVR res) =>  individualRepo.insertDog(
-      (
-        id: -1,
+      Dog(
         name: res.name,
         fullName: res.fullName,
         birthday: res.birthDate,
-        weightHistory: <Weight>[],
-        eventHistory: <Event>[],
       )
   ).then((_) {
      activeDogIndex = data.length;

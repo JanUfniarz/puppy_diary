@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/types/entities/event.dart';
 import 'package:puppy_diary/ui/helpers/date_format.dart';
 import 'package:puppy_diary/ui/style/icon_theme.dart';
 

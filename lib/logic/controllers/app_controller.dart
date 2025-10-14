@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/database/individual_repository.dart';
-import 'package:puppy_diary/types/data_types/core_types.dart';
-import 'package:puppy_diary/types/data_types/utility_types.dart';
+import 'package:puppy_diary/types/data_types/view_results.dart';
+import 'package:puppy_diary/types/entities/dog.dart';
+import 'package:puppy_diary/types/entities/event.dart';
+import 'package:puppy_diary/types/entities/weight.dart';
 
 class AppController extends ChangeNotifier {
   AppController._();
@@ -49,10 +51,8 @@ class AppController extends ChangeNotifier {
 
   void addEvent(AddEventVR val) => individualRepo.insertEvent(
       dog!.id,
-      (
-        id: -1,
+      Event(
         time: val.time,
-        done: false,
         type: val.type,
         note: val.note,
       )

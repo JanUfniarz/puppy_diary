@@ -1,6 +1,9 @@
 import 'package:puppy_diary/database/repository_converter.dart';
 import 'package:puppy_diary/database/sqlite_repository.dart';
-import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/types/data_types/database_data.dart';
+import 'package:puppy_diary/types/entities/dog.dart';
+import 'package:puppy_diary/types/entities/event.dart';
+import 'package:puppy_diary/types/entities/weight.dart';
 
 class IndividualRepository
     extends SQLiteRepository

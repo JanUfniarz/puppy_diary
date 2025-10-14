@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/types/data_types/utility_types.dart';
+import 'package:puppy_diary/types/data_types/widgets_data.dart';
 import 'package:puppy_diary/ui/style/text_theme.dart';
 
 mixin FormElements {

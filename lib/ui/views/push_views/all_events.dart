@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/logic/controllers/app_controller.dart';
-import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/types/entities/event.dart';
 import 'package:puppy_diary/ui/views/views.dart';
 import 'package:puppy_diary/ui/widgets/elements/event_item.dart';
 import 'package:puppy_diary/ui/views/sheets/confirm_delete.dart';
@@ -39,10 +39,8 @@ class _AllEventsViewState extends State<_AllEventsView> {
   _switchDone(int index) {
     var e = events[index];
     setState(() {
-      events[index] = (
-        id: e.id, time: e.time, done: !e.done,
-        type: e.type, note: e.note
-      );
+      events[index] = Event.from(e)
+        ..done = !e.done;
     });
     AppController.instance.update(events[index]);
   }

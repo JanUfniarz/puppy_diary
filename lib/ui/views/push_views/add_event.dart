@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/types/data_types/utility_types.dart';
+import 'package:puppy_diary/types/data_types/view_results.dart';
 import 'package:puppy_diary/types/enums/event_type.dart';
 import 'package:puppy_diary/ui/helpers/form.dart';
 import 'package:puppy_diary/ui/style/icon_theme.dart';

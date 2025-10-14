@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puppy_diary/types/function_types.dart';
+import 'package:puppy_diary/types/data_types/function_types.dart';
 
 AppViewBuilder puppyView = (context, controller) => Column(
   crossAxisAlignment: CrossAxisAlignment.stretch,

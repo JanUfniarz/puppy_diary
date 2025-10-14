@@ -1,4 +1,5 @@
-import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/types/entities/dog.dart';
+import 'package:puppy_diary/types/entities/event.dart';
 
 extension DogData on Dog {
   double? get lastWeight => weightHistory.isEmpty

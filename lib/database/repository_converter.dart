@@ -1,4 +1,7 @@
-import 'package:puppy_diary/types/data_types/core_types.dart';
+import 'package:puppy_diary/types/data_types/database_data.dart';
+import 'package:puppy_diary/types/entities/dog.dart';
+import 'package:puppy_diary/types/entities/event.dart';
+import 'package:puppy_diary/types/entities/weight.dart';
 import 'package:puppy_diary/types/enums/event_type.dart';
 
 mixin RepositoryConverter {
@@ -36,7 +39,7 @@ mixin RepositoryConverter {
   };
 
 
-  Dog individualFromRaw(RawData raw) => (
+  Dog individualFromRaw(RawData raw) => Dog(
       id: raw.dog['id'] as int,
       name: raw.dog['name'] as String,
       fullName: raw.dog['full_name'] as String,
@@ -49,13 +52,13 @@ mixin RepositoryConverter {
           .toList(),
   );
 
-  Weight weightFromRaw(RawObject raw) => (
+  Weight weightFromRaw(RawObject raw) => Weight(
     id: raw['id'] as int,
     time: _parse(raw['time']),
     weight: raw['weight'] as double
   );
 
-  Event eventFromRaw(RawObject raw) => (
+  Event eventFromRaw(RawObject raw) => Event(
     id: raw['id'] as int,
     time: _parse(raw['time']),
     done: raw['done'] == 1,

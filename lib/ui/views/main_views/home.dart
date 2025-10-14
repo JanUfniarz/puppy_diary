@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/logic/extensions/dog_data.dart';
-import 'package:puppy_diary/types/function_types.dart';
+import 'package:puppy_diary/types/data_types/function_types.dart';
 import 'package:puppy_diary/ui/views/push_views/add_event.dart';
 import 'package:puppy_diary/ui/views/push_views/all_events.dart';
 import 'package:puppy_diary/ui/widgets/components/next_event_card.dart';
