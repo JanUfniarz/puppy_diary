@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/data_types/view_results.dart';
 import 'package:puppy_diary/types/enums/event_type.dart';
 import 'package:puppy_diary/ui/helpers/form.dart';
+import 'package:puppy_diary/ui/helpers/value_wrapper.dart';
 import 'package:puppy_diary/ui/style/icon_theme.dart';
 import 'package:puppy_diary/ui/views/views.dart';
+import 'package:puppy_diary/ui/widgets/elements/big_text_field.dart';
 import 'package:puppy_diary/ui/widgets/elements/date_picker.dart';
+import 'package:puppy_diary/ui/widgets/elements/event_type_picker.dart';
 
 Future<AddEventVR?> pushAddEventView(
     BuildContext context
@@ -22,21 +25,9 @@ class _AddEventView extends StatefulWidget  {
 
 class _AddEventViewState extends State<_AddEventView> with FormElements {
 
-  EventType selectedType = EventType.controlWet;
-  RestorableDateTime selectedDate = RestorableDateTime(DateTime.now());
+  ValueWrapper<EventType> selectedType = ValueWrapper(EventType.controlWet);
+  ValueWrapper<DateTime> selectedDate = ValueWrapper(DateTime.now());
   String note = '';
-
-
-
-  List<DropdownMenuItem<EventType>> menuItems = EventType.values
-      .map((type) =>
-          DropdownMenuItem(
-              value: type,
-              child: Text(type.label)
-          )
-      ).toList();
-
-
 
 
   @override
@@ -48,7 +39,7 @@ class _AddEventViewState extends State<_AddEventView> with FormElements {
       Theme(
         data: ThemeData(iconTheme: mainIcon),
         child: Icon(
-          selectedType.icon,
+          selectedType.value.icon,
         ),
       ),
 
@@ -56,34 +47,29 @@ class _AddEventViewState extends State<_AddEventView> with FormElements {
       ...inputList(context, [
         (
           label: 'Event Type',
-          child: DropdownButton<EventType>(
-            items: menuItems,
-            onChanged: (type) => setState(() {
-              if (type != null) selectedType = type;
-            }),
-            value: selectedType,
+          child: EventTypePicker(
+              selectedType,
+              onTypeChanged: () => setState(() {})
           ),
         ),
         (
           label: 'Date',
-          child: DatePicker(selectedDate, scope: DatePickerScope.future),
+          child: DatePicker(selectedDate),
         )
       ]),
 
 
-      ...textInputList(context, [
-        (
-          label: 'Note',
-          onChanged: (text) => setState(() => note = text),
-        )
-      ]),
+      BigTextField(
+        label: 'Note',
+        onChanged: (text) => setState(() => note = text),
+      ),
 
 
-      ElevatedButton(
+      FilledButton(
           onPressed: () => Navigator.pop(
               context,
               (
-                type: selectedType,
+                type: selectedType.value,
                 time: selectedDate.value,
                 note: note
               )

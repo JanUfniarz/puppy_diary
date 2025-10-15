@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/data_types/view_results.dart';
 import 'package:puppy_diary/ui/helpers/form.dart';
+import 'package:puppy_diary/ui/helpers/value_wrapper.dart';
 import 'package:puppy_diary/ui/style/text_theme.dart';
 import 'package:puppy_diary/ui/views/views.dart';
 import 'package:puppy_diary/ui/widgets/elements/date_picker.dart';
@@ -21,7 +22,7 @@ class _AddDogView extends StatefulWidget {
 class _AddDogViewState extends State<_AddDogView> with FormElements {
   String errorInfo = '';
 
-  RestorableDateTime selectedDate = RestorableDateTime(DateTime.now());
+  ValueWrapper<DateTime> selectedDate = ValueWrapper(DateTime.now());
   String? name;
   String? fullName;
 

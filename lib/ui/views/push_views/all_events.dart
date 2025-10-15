@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/logic/controllers/app_controller.dart';
 import 'package:puppy_diary/types/entities/event.dart';
+import 'package:puppy_diary/ui/views/sheets/edit_event_sheet.dart';
 import 'package:puppy_diary/ui/views/views.dart';
 import 'package:puppy_diary/ui/widgets/elements/event_item.dart';
 import 'package:puppy_diary/ui/views/sheets/confirm_delete.dart';
 
-Future<AllEventsVR> pushAllEventsView(
+Future<void> pushAllEventsView(
     BuildContext context,
     List<Event> events
-) => pushView<AllEventsVR>(
+) => pushView<void>(
     context, (_) => _AllEventsView(events)
 );
 
@@ -46,10 +47,25 @@ class _AllEventsViewState extends State<_AllEventsView> {
   }
 
 
-  _delete(Event event) {
-    setState(() => events.remove(event));
-    AppController.instance.delete(event);
-  }
+  _delete(int index) => confirmDeleteSheet(context)
+      .then((isConfirmed) {
+        if (isConfirmed ?? false) {
+          var event = events.removeAt(index);
+          setState(() {});
+          AppController.instance.delete(event);
+        }
+      }
+  );
+
+
+  _edit(int index) => editEventSheet(context, events[index])
+      .then((editedEvent) {
+        if (editedEvent != null) {
+          setState(() => events[index] = editedEvent);
+          AppController.instance.update(editedEvent);
+        }
+      }
+  );
 
 
   Widget get emptyView => const Center(
@@ -69,18 +85,11 @@ class _AllEventsViewState extends State<_AllEventsView> {
             actions: (
 
               done: () => _switchDone(index),
-
-              edit: () {},
-
-              delete: () => confirmDeleteSheet(context)
-                  .then((isConfirmed) {
-                    if (isConfirmed ?? false) _delete(events[index]);
-                  })
+              edit: () => _edit(index),
+              delete: () => _delete(index)
 
             )
         ),
       ),
     );
 }
-
-typedef AllEventsVR = Never?;
