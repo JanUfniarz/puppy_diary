@@ -40,12 +40,12 @@ class _EditEventSheetContentState extends State<_EditEventSheetContent>
 
 
   late ValueWrapper<DateTime> newTime = ValueWrapper(widget.event.time);
-  late ValueWrapper<EventType> newType = ValueWrapper(widget.event.type);
+  late EventType newType = widget.event.type;
   late String newNote = widget.event.note;
 
   Event get newEvent => Event.from(widget.event)
     ..time = newTime.value
-    ..type = newType.value
+    ..type = newType
     ..note = newNote;
 
 
@@ -98,7 +98,10 @@ class _EditEventSheetContentState extends State<_EditEventSheetContent>
   Widget _buildDataTab() => elementsArrangement(inputList(context, [
     (
       label: 'New Event Type',
-      child: EventTypePicker(newType),
+      child: EventTypePicker(
+          value: newType,
+          onChanged: (type) => setState(() => newType = type ?? EventType.other)
+      ),
     ),
     (
       label: 'New Date',

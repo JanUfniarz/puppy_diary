@@ -25,7 +25,7 @@ class _AddEventView extends StatefulWidget  {
 
 class _AddEventViewState extends State<_AddEventView> with FormElements {
 
-  ValueWrapper<EventType> selectedType = ValueWrapper(EventType.controlWet);
+  EventType selectedType = EventType.controlWet;
   ValueWrapper<DateTime> selectedDate = ValueWrapper(DateTime.now());
   String note = '';
 
@@ -39,7 +39,7 @@ class _AddEventViewState extends State<_AddEventView> with FormElements {
       Theme(
         data: ThemeData(iconTheme: mainIcon),
         child: Icon(
-          selectedType.value.icon,
+          selectedType.icon,
         ),
       ),
 
@@ -48,8 +48,10 @@ class _AddEventViewState extends State<_AddEventView> with FormElements {
         (
           label: 'Event Type',
           child: EventTypePicker(
-              selectedType,
-              onTypeChanged: () => setState(() {})
+              value: selectedType,
+              onChanged: (type) => setState(
+                      () => selectedType = type ?? EventType.other
+              )
           ),
         ),
         (
@@ -69,7 +71,7 @@ class _AddEventViewState extends State<_AddEventView> with FormElements {
           onPressed: () => Navigator.pop(
               context,
               (
-                type: selectedType.value,
+                type: selectedType,
                 time: selectedDate.value,
                 note: note
               )

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/logic/controllers/app_controller.dart';
+import 'package:puppy_diary/logic/helpers/events_filter.dart';
 import 'package:puppy_diary/types/entities/event.dart';
+import 'package:puppy_diary/ui/views/sheets/confirm_delete.dart';
 import 'package:puppy_diary/ui/views/sheets/edit_event_sheet.dart';
 import 'package:puppy_diary/ui/views/views.dart';
+import 'package:puppy_diary/ui/widgets/buttons/switch_button.dart';
 import 'package:puppy_diary/ui/widgets/elements/event_item.dart';
-import 'package:puppy_diary/ui/views/sheets/confirm_delete.dart';
+import 'package:puppy_diary/ui/widgets/elements/event_type_picker.dart';
 
 Future<void> pushAllEventsView(
     BuildContext context,
@@ -30,9 +33,14 @@ class _AllEventsViewState extends State<_AllEventsView> {
   late List<Event> events;
 
 
+  EventsFilter filter = EventsFilter();
+
+
   @override
   void initState() {
-    events = List.of(widget.events);
+    events = List.of(widget.events)
+      ..sort((x, y) => x.time.compareTo(y.time));
+
     super.initState();
   }
 
@@ -73,23 +81,58 @@ class _AllEventsViewState extends State<_AllEventsView> {
   );
 
 
+  Widget filterBar() => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+
+      SwitchButton(
+          label: 'Not done',
+          onChanged: (val) => setState(() => filter.onlyNotDone = val),
+          initialValue: filter.onlyNotDone
+      ),
+
+      EventTypePicker(
+          onChanged: (type) => setState(() => filter.typeFilter = type),
+      ),
+
+      SwitchButton(
+          label: 'Future',
+          onChanged: (val) => setState(() => filter.showFuture = val),
+      ),
+
+      SwitchButton(
+          label: 'Past',
+          onChanged: (val) => setState(() => filter.showPast = val),
+      ),
+    ],
+  );
+
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: const Text('All Events'),
       ),
-      body: events.isEmpty ? emptyView : ListView.builder(
-        itemCount: events.length,
-        itemBuilder: (context, index) => EventItem(
-            events[index],
-            actions: (
+      body: events.isEmpty ? emptyView : Column(
+        children: [
+          filterBar(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: events.length,
+              itemBuilder: (context, index) => filter.idsToShow(events).contains(events[index].id)
+                  ? EventItem(
+                    events[index],
+                    actions: (
 
-              done: () => _switchDone(index),
-              edit: () => _edit(index),
-              delete: () => _delete(index)
+                      done: () => _switchDone(index),
+                      edit: () => _edit(index),
+                      delete: () => _delete(index)
 
-            )
-        ),
+                    )
+                  ) : const SizedBox.shrink(),
+            ),
+          ),
+        ],
       ),
     );
 }

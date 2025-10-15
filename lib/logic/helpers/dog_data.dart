@@ -1,3 +1,4 @@
+import 'package:puppy_diary/logic/functions/date_time_functions.dart';
 import 'package:puppy_diary/types/entities/dog.dart';
 import 'package:puppy_diary/types/entities/event.dart';
 
@@ -12,14 +13,8 @@ extension DogData on Dog {
       ? null
       : upcomingEvents.reduce((x, y) => x.time.isBefore(y.time) ? x : y);
 
-  List<Event> get upcomingEvents {
-
-    final now = DateTime.now();
-    final todayStart = DateTime(now.year, now.month, now.day);
-
-    return eventHistory
-      .where((event) => !event.done && event.time.isAfter(todayStart))
+  List<Event> get upcomingEvents => eventHistory
+      .where((event) => !event.done && event.time.isAfter(today()))
       .toList();
-  }
 
 }

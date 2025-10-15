@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:puppy_diary/logic/functions/date_time_functions.dart';
 import 'package:puppy_diary/types/entities/event.dart';
-import 'package:puppy_diary/ui/helpers/date_format.dart';
 import 'package:puppy_diary/ui/style/icon_theme.dart';
 
 class NextEventCard extends StatelessWidget {
