@@ -4,6 +4,7 @@ import 'package:puppy_diary/types/enums/event_type.dart';
 import 'package:puppy_diary/ui/helpers/form.dart';
 import 'package:puppy_diary/ui/helpers/value_wrapper.dart';
 import 'package:puppy_diary/ui/views/sheets/bottom_sheet.dart';
+import 'package:puppy_diary/ui/widgets/buttons/save_button.dart';
 import 'package:puppy_diary/ui/widgets/elements/big_text_field.dart';
 import 'package:puppy_diary/ui/widgets/elements/date_picker.dart';
 import 'package:puppy_diary/ui/widgets/elements/event_type_picker.dart';
@@ -87,9 +88,8 @@ class _EditEventSheetContentState extends State<_EditEventSheetContent>
           ),
         ),
 
-        FilledButton(
+        SaveButton(
             onPressed: () => widget.onSave(newEvent),
-            child: const Text('Save')
         ),
       ],
     );

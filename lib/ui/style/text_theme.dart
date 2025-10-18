@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/ui/style/color_scheme.dart';
 
-extension Access on BuildContext {
-    TextTheme get texts => Theme.of(this).textTheme;
-}
 
 TextTheme textDefaultTheme = TextTheme(
 
@@ -23,8 +20,4 @@ TextTheme textDefaultTheme = TextTheme(
 TextStyle errorLabel = TextStyle(
     color: colorScheme.error,
     fontSize: 20,
-);
-
-TextStyle darkLabel = TextStyle(
-    color: colorScheme.onPrimary,
 );

@@ -28,6 +28,8 @@ class _AllEventsView extends StatefulWidget {
   State<_AllEventsView> createState() => _AllEventsViewState();
 }
 
+
+
 class _AllEventsViewState extends State<_AllEventsView> {
 
   late List<Event> events;
@@ -92,17 +94,26 @@ class _AllEventsViewState extends State<_AllEventsView> {
       ),
 
       EventTypePicker(
-          onChanged: (type) => setState(() => filter.typeFilter = type),
+        value: filter.typeFilter,
+        onChanged: (type) => setState(() => filter.typeFilter = type),
       ),
 
-      SwitchButton(
-          label: 'Future',
-          onChanged: (val) => setState(() => filter.showFuture = val),
-      ),
-
-      SwitchButton(
-          label: 'Past',
-          onChanged: (val) => setState(() => filter.showPast = val),
+      SegmentedButton<int>(
+        segments: const <ButtonSegment<int>>[
+          ButtonSegment<int>(value: 0, label: Text('Future')),
+          ButtonSegment<int>(value: 1, label: Text('Past')),
+        ],
+        selected: <int>{
+          if (filter.showFuture) 0,
+          if (filter.showPast) 1,
+        },
+        onSelectionChanged: (Set<int> newSelection) => setState(() {
+          filter.showFuture = newSelection.contains(0);
+          filter.showPast = newSelection.contains(1);
+        }),
+        multiSelectionEnabled: true,
+        emptySelectionAllowed: true,
+        showSelectedIcon: false,
       ),
     ],
   );

@@ -12,42 +12,51 @@ class AppDrawer extends StatelessWidget {
   AppController get controller => AppController.instance;
 
   @override
-  Widget build(BuildContext context) => Drawer(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+  Widget build(BuildContext context) {
+    var headerLabel = TextStyle(
+      color: Theme.of(context).colorScheme.onTertiary,
+    );
+
+    return Drawer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
 
 
-        controller.drawerData.active.name != null ? UserAccountsDrawerHeader(
-          accountName: Text(
-            controller.drawerData.active.name!,
-            style: darkLabel,
+          controller.drawerData.active.name != null ? UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.tertiary,
+            ),
+            accountName: Text(
+              controller.drawerData.active.name!,
+              style: headerLabel,
+            ),
+            accountEmail: Text(
+              controller.drawerData.active.fullName ?? "",
+              style: headerLabel,
+            ),
+          ) : const SizedBox(),
+
+
+          ...controller.drawerData.rest.map((dog) => _ChangeDogButton(
+            dog.name,
+            onTap: () {
+              controller.switchDog(dog.id);
+              Navigator.pop(context);
+            },
+          )),
+
+
+          _AddDogButton(
+            onTap: () => pushAddDogView(context)
+              .then((val) {
+                if (val != null) controller.addDog(val);
+              }).then((_) => Navigator.pop(context))
           ),
-          accountEmail: Text(
-            controller.drawerData.active.fullName ?? "",
-            style: darkLabel,
-          ),
-        ) : const SizedBox(),
-
-
-        ...controller.drawerData.rest.map((dog) => _ChangeDogButton(
-          dog.name,
-          onTap: () {
-            controller.switchDog(dog.id);
-            Navigator.pop(context);
-          },
-        )),
-
-
-        _AddDogButton(
-          onTap: () => pushAddDogView(context)
-            .then((val) {
-              if (val != null) controller.addDog(val);
-            }).then((_) => Navigator.pop(context))
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }
 
 
@@ -63,11 +72,11 @@ class _ChangeDogButton extends StatelessWidget {
   Widget build(BuildContext context) => InkWell(
     onTap: onTap,
     child: Container(
-        height: 40,
+        height: 60,
         decoration: bottomLine,
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: Text(dogName, style: context.texts.bodyLarge,),
+          child: Text(dogName, style: Theme.of(context).textTheme.bodyLarge,),
         )
     ),
   );
@@ -96,7 +105,7 @@ class _AddDogButton extends StatelessWidget {
             ),
           ),
           Text("Add Dog",
-            style: context.texts.titleMedium,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       )

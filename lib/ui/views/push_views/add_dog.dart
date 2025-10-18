@@ -4,6 +4,7 @@ import 'package:puppy_diary/ui/helpers/form.dart';
 import 'package:puppy_diary/ui/helpers/value_wrapper.dart';
 import 'package:puppy_diary/ui/style/text_theme.dart';
 import 'package:puppy_diary/ui/views/views.dart';
+import 'package:puppy_diary/ui/widgets/buttons/save_button.dart';
 import 'package:puppy_diary/ui/widgets/elements/date_picker.dart';
 
 
@@ -53,7 +54,7 @@ class _AddDogViewState extends State<_AddDogView> with FormElements {
         ]),
 
 
-        ElevatedButton(
+        SaveButton(
             onPressed: () {
               if (name == null) setState(() => errorInfo = 'Name is required!');
               else Navigator.pop(context,
@@ -64,7 +65,6 @@ class _AddDogViewState extends State<_AddDogView> with FormElements {
                   )
               );
             },
-            child: const Text('Save')
         ),
 
 

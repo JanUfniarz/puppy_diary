@@ -41,7 +41,10 @@ class _EventItemState extends State<EventItem> {
 
 
     ListTile info = ListTile(
-        leading: Icon(widget.event.type.icon),
+        leading: Icon(
+          widget.event.type.icon,
+          color: Theme.of(context).colorScheme.tertiary,
+        ),
 
         title: Text(
             widget.event.type.label,

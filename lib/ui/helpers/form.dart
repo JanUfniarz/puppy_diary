@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:puppy_diary/types/data_types/widgets_data.dart';
-import 'package:puppy_diary/ui/style/text_theme.dart';
 
 mixin FormElements {
 
@@ -15,7 +14,7 @@ mixin FormElements {
 
           Text(
             data[index].label,
-            style: context.texts.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
 
           data[index].child,
@@ -34,7 +33,7 @@ mixin FormElements {
         decoration: InputDecoration(
           label: Text(
             data[index].label,
-            style: context.texts.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
 

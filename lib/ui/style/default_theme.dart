@@ -9,28 +9,24 @@ ThemeData defaultTheme = ThemeData(
 
   appBarTheme: AppBarTheme(
       iconTheme: appbarIcon,
-      titleTextStyle: textDefaultTheme.titleLarge,
       centerTitle: true,
-
-  ),
-
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: colorScheme.secondary,
-    selectedItemColor: colorScheme.primary,
-    unselectedItemColor: colorScheme.onPrimary,
   ),
 
   drawerTheme: const DrawerThemeData(
     width: 200,
   ),
 
-  cardTheme: CardThemeData(
-    color:  colorScheme.secondary,
+  dividerTheme: const DividerThemeData(
+    thickness: 2,
   ),
 
-  dividerTheme: DividerThemeData(
-    color: colorScheme.primary,
-    thickness: 2,
-  )
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      backgroundColor: colorScheme.tertiary,
+      foregroundColor: colorScheme.onTertiary,
+    ),
+  ),
+
+  useMaterial3: true,
 
 );

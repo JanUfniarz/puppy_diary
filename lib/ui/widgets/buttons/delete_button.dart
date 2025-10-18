@@ -7,8 +7,15 @@ class DeleteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FilledButton.icon(
       onPressed: onPressed,
-      icon: const Icon(Icons.delete),
-      label: const Text('Delete'),
+      icon: Icon(
+          Icons.delete,
+        color: Theme.of(context).colorScheme.onErrorContainer,
+      ),
+      label: Text('Delete',
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onErrorContainer,
+        ),
+      ),
       style: FilledButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.errorContainer,
       ),

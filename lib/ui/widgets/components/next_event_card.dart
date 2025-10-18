@@ -53,7 +53,7 @@ class NextEventCard extends StatelessWidget {
           )
       ),
 
-      ElevatedButton(
+      OutlinedButton(
           onPressed: onAddEventPressed,
           child: const Row(
             children: [
